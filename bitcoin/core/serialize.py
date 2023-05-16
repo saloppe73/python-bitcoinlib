@@ -1,4 +1,4 @@
-# Copyright (C) 2012-2018 The python-bitcoinlib developers
+# Copyright (C) The python-bitcoinlib developers
 #
 # This file is part of python-bitcoinlib.
 #
@@ -20,6 +20,8 @@ import struct
 
 from io import BytesIO
 
+from bitcoin.core.contrib.ripemd160 import ripemd160
+
 MAX_SIZE = 0x02000000
 
 
@@ -29,10 +31,7 @@ def Hash(msg):
 
 def Hash160(msg):
     """RIPEME160(SHA256(msg)) -> bytes"""
-    h = hashlib.new('ripemd160')
-    h.update(hashlib.sha256(msg).digest())
-    return h.digest()
-
+    return ripemd160(hashlib.sha256(msg).digest())
 
 class SerializationError(Exception):
     """Base class for serialization errors"""

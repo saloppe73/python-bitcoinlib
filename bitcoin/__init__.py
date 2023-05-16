@@ -1,4 +1,4 @@
-# Copyright (C) 2012-2018 The python-bitcoinlib developers
+# Copyright (C) The python-bitcoinlib developers
 #
 # This file is part of python-bitcoinlib.
 #
@@ -15,7 +15,7 @@ import bitcoin.core
 # Note that setup.py can break if __init__.py imports any external
 # dependencies, as these might not be installed when setup.py runs. In this
 # case __version__ could be moved to a separate version.py and imported here.
-__version__ = '0.11.1dev'
+__version__ = '0.12.1'
 
 class MainParams(bitcoin.core.CoreMainParams):
     MESSAGE_START = b'\xf9\xbe\xb4\xd9'
@@ -50,6 +50,11 @@ class SigNetParams(bitcoin.core.CoreSigNetParams):
     DEFAULT_PORT = 38333
     RPC_PORT = 38332
     DNS_SEEDS = (("signet.bitcoin.sprovoost.nl", "seed.signet.bitcoin.sprovoost.nl"))
+    BASE58_PREFIXES = {'PUBKEY_ADDR':111,
+                       'SCRIPT_ADDR':196,
+                       'SECRET_KEY' :239}
+
+    BECH32_HRP = 'tb'
 
 class RegTestParams(bitcoin.core.CoreRegTestParams):
     MESSAGE_START = b'\xfa\xbf\xb5\xda'
@@ -84,5 +89,7 @@ def SelectParams(name):
         params = bitcoin.core.coreparams = TestNetParams()
     elif name == 'regtest':
         params = bitcoin.core.coreparams = RegTestParams()
+    elif name == 'signet':
+        params = bitcoin.core.coreparams = SigNetParams()
     else:
         raise ValueError('Unknown chain %r' % name)

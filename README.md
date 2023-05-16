@@ -11,7 +11,7 @@ focus on providing tools to manipulate the internals of how Bitcoin works.
 
     sudo apt-get install libssl-dev
 
-The RPC interface, `bitcoin.rpc`, is designed to work with Bitcoin Core v0.16.0.
+The RPC interface, `bitcoin.rpc`, should work with Bitcoin Core v24.0 or later.
 Older versions may work but there do exist some incompatibilities.
 
 
@@ -86,7 +86,7 @@ Do the following:
     import bitcoin
     bitcoin.SelectParams(NAME)
 
-Where NAME is one of 'testnet', 'mainnet', or 'regtest'. The chain currently
+Where NAME is one of 'testnet', 'mainnet', 'signet', or 'regtest'. The chain currently
 selected is a global variable that changes behavior everywhere, just like in
 the Satoshi codebase.
 
@@ -103,6 +103,7 @@ system, you can run unit tests for multiple Python versions:
     ./runtests.sh
 
 HTML coverage reports can then be found in the htmlcov/ subdirectory.
+
 
 ## Documentation
 
